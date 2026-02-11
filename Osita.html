@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitación para Osita</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff4b6e, #ff758c);
+      overflow: hidden;
+    }
+
+    /* Tarjeta */
+    .card {
+      background: #fff;
+      padding: 35px 25px;
+      border-radius: 20px;
+      text-align: center;
+      width: 92%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      position: relative;
+      animation: fadeIn 1s ease;
+      z-index: 2;
+    }
+
+    /* Nombre animado */
+    .name {
+      font-size: 28px;
+      color: #ff4b6e;
+      margin-bottom: 10px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    h1 { color: #ff4b6e; margin-bottom: 10px; font-size: 22px; }
+
+    p { color: #444; margin-bottom: 20px; font-size: 17px; line-height: 1.4; }
+
+    .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .yes { background: #ff4b6e; color: white; }
+    .yes:hover { transform: scale(1.05); }
+
+    .no { background: #eee; color: #333; position: relative; }
+
+    /* Flores cayendo */
+    .flower {
+      position: absolute;
+      font-size: 24px;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Explosión de flores */
+    @keyframes burst {
+      from { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      to { transform: translate(var(--x), var(--y)) scale(1.4); opacity: 0; }
+    }
+
+    .burstFlower {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      font-size: 28px;
+      pointer-events: none;
+      animation: burst 1.5s ease-out forwards;
+      z-index: 5;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9);} 
+      to { opacity: 1; transform: scale(1);} 
+    }
+
+    .message { margin-top: 15px; font-weight: bold; color: #ff4b6e; display: none; }
+    .date { margin-top: 10px; font-weight: bold; color: #555; }
+
+    /* Pantalla final romántica */
+    .finalScreen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #ff4b6e, #ff758c);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: 1s;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .finalScreen.show { opacity: 1; pointer-events: auto; }
+
+    .finalContent { max-width: 520px; animation: fadeIn 1s ease; position: relative; z-index: 2; }
+
+    .finalContent h2 { font-size: 26px; margin-bottom: 12px; }
+    .finalContent p { font-size: 18px; line-height: 1.5; }
+
+    .finalContent img {
+      width: 220px;
+      max-width: 80%;
+      border-radius: 12px;
+      margin: 15px 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+
+    /* Lluvia de corazones final */
+    .finalHeart {
+      position: absolute;
+      top: -10vh;
+      font-size: 22px;
+      animation: heartFall linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes heartFall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Juego romántico mejorado */
+    .game { margin-top: 15px; display: none; }
+
+    .heartBtn {
+      font-size: 28px;
+      cursor: pointer;
+      margin: 6px;
+      display: inline-block;
+      transition: transform .2s;
+    }
+
+    .heartBtn:hover { transform: scale(1.3); }
+
+    /* Mensaje secreto */
+    .secret {
+      margin-top: 15px;
+      display: none;
+      color: #ff4b6e;
+      font-weight: bold;
+    }
+
+    @media (max-width: 420px) {
+      .name { font-size: 24px; }
+      p { font-size: 16px; }
+      .finalContent p { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="name">❤️ Osita ❤️</div>
+    <h1>💌 Invitación Especial</h1>
+
+    <p>
+      Como buen programador, hice esta invitación solo para ti…<br><br>
+      <strong>¿Quieres ser mi San Valentín? ❤️</strong>
+    </p>
+
+    <div class="date">📅 14 de Febrero</div>
+
+    <div class="buttons" style="margin-top:20px;">
+      <button class="yes" onclick="accept()">¡Sí quiero!</button>
+      <button class="no" id="noBtn">No 😅</button>
+    </div>
+
+    <div class="message" id="message">Sabía que dirías que sí ❤️✨</div>
+
+    <!-- Mini juego -->
+    <div class="game" id="game">
+      <p>Atrapa 5 corazones que se mueven 💖</p>
+      <div id="hearts"></div>
+    </div>
+
+    <!-- Mensaje secreto -->
+    <div class="secret" id="secret">
+      Mi lugar favorito siempre será contigo ❤️
+    </div>
+  </div>
+
+  <!-- Pantalla final -->
+  <div class="finalScreen" id="finalScreen">
+    <div class="finalContent">
+      <h2>🌹 Feliz San Valentín ❤️<br>Nos vemos el sábado mi amor</h2>
+
+      <img src="OsitosComiendo.gif" alt="Ositos comiendo juntos" />
+
+      <p>Te quiero mucho, Osita ❤️</p>
+    </div>
+  </div>
+
+  <script>
+    const flowers = ["🌹","🌷","🌻","💐","🌺"];
+
+    function accept() {
+      document.getElementById("message").style.display = "block";
+      document.getElementById("game").style.display = "block";
+      burstFlowers();
+
+      setTimeout(() => {
+        const screen = document.getElementById("finalScreen");
+        screen.classList.add("show");
+        startHeartRain();
+      }, 3000);
+
+      spawnHearts();
+    }
+
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random()*200-100;
+      const y = Math.random()*200-100;
+      noBtn.style.transform = `translate(${x}px,${y}px)`;
+    });
+
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.className = "flower";
+      flower.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
+      flower.style.left = Math.random()*100+"vw";
+      flower.style.animationDuration = 5+Math.random()*5+"s";
+      document.body.appendChild(flower);
+      setTimeout(()=>flower.remove(),10000);
+    }
+
+    setInterval(createFlower,400);
+
+    function burstFlowers(){
+      for(let i=0;i<40;i++){
+        const f=document.createElement("div");
+        f.className="burstFlower";
+        f.innerHTML=flowers[Math.floor(Math.random()*flowers.length)];
+        f.style.setProperty("--x",(Math.random()-0.5)*800+"px");
+        f.style.setProperty("--y",(Math.random()-0.5)*800+"px");
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1500);
+      }
+    }
+
+    /* Juego mejorado: corazones que se mueven */
+    let score = 0;
+
+    function spawnHearts() {
+      const container = document.getElementById("hearts");
+      container.innerHTML = "";
+      score = 0;
+
+      for(let i=0;i<7;i++){
+        const heart=document.createElement("span");
+        heart.innerHTML="❤️";
+        heart.className="heartBtn";
+        moveHeart(heart);
+
+        heart.onclick=()=>{
+          heart.remove();
+          score++;
+          if(score===5){
+            document.getElementById("secret").style.display="block";
+          }
+        };
+
+        setInterval(()=>moveHeart(heart),1200);
+        container.appendChild(heart);
+      }
+    }
+
+    function moveHeart(el){
+      el.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*20-10}px)`;
+    }
+
+    /* Lluvia de corazones final */
+    function startHeartRain(){
+      const screen = document.getElementById("finalScreen");
+
+      setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.className="finalHeart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.animationDuration = 4 + Math.random()*3 + "s";
+        screen.appendChild(heart);
+        setTimeout(()=>heart.remove(),7000);
+      },200);
+    }
+  </script>
+
+</body>
+</html>
