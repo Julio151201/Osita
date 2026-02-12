@@ -246,6 +246,12 @@
     const flowers = ["🌹","🌷","🌻","💐","🌺"];
 
     function accept() {
+      const music = document.getElementById("bgMusic");
+      if (music) {
+        music.currentTime = 0;
+        music.play().catch(()=>{});
+      }
+
       document.getElementById("message").style.display = "block";
       document.getElementById("game").style.display = "block";
       burstFlowers();
@@ -339,5 +345,22 @@
     }
   </script>
 
+  <!-- Música romántica -->
+  <!-- Coloca tu archivo por ejemplo como: musica.mp3 en el repositorio -->
+  <audio id="bgMusic" src="musica.mp3" loop></audio>
+
+  <script>
+    // Reproducir música al primer toque/click (requerido en móviles)
+    function startMusicOnce() {
+      const music = document.getElementById("bgMusic");
+      if (!music) return;
+      music.play().catch(()=>{});
+      document.removeEventListener("click", startMusicOnce);
+      document.removeEventListener("touchstart", startMusicOnce);
+    }
+
+    document.addEventListener("click", startMusicOnce);
+    document.addEventListener("touchstart", startMusicOnce);
+  </script>
 </body>
 </html>
