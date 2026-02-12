@@ -20,9 +20,9 @@
       inset: 0;
     }
 
-    /* Tarjeta fija al centro */
+    /* Tarjeta fija al centro con fondo rosa */
     .card {
-      background: #fff;
+      background: #ffe4ec;
       padding: 35px 25px;
       border-radius: 20px;
       text-align: center;
@@ -71,9 +71,10 @@
 
     .no { background: #eee; color: #333; position: relative; }
 
-    /* Flores cayendo */
+    /* Flores cayendo desde arriba */
     .flower {
       position: absolute;
+      top: -10vh;
       font-size: 24px;
       animation: fall linear infinite;
       pointer-events: none;
@@ -81,8 +82,8 @@
     }
 
     @keyframes fall {
-      from { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-      to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+      from { transform: translateY(0) rotate(0deg); opacity: 1; }
+      to { transform: translateY(120vh) rotate(360deg); opacity: 0; }
     }
 
     /* Explosión de flores */
@@ -194,7 +195,10 @@
     <h1>💌 Invitación Especial</h1>
 
     <p>
-      Como buen programador, hice esta invitación solo para ti…<br><br>
+      Si el amor fuera el mar,<br>
+      yo me quisiera perder,<br>
+      navegando en tu mirada<br>
+      hasta el amanecer.<br><br>
       <strong>¿Quieres ser mi San Valentín? ❤️</strong>
     </p>
 
@@ -238,21 +242,26 @@
       document.getElementById("game").style.display = "block";
       burstFlowers();
 
+      /* Más tiempo antes de pantalla final */
       setTimeout(() => {
         const screen = document.getElementById("finalScreen");
         screen.classList.add("show");
         startHeartRain();
-      }, 3000);
+      }, 7000);
 
       spawnHearts();
     }
 
     const noBtn = document.getElementById("noBtn");
-    noBtn.addEventListener("mouseover", () => {
+
+    function moveNoButton() {
       const x = Math.random()*200-100;
       const y = Math.random()*200-100;
       noBtn.style.transform = `translate(${x}px,${y}px)`;
-    });
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton); // para celular
 
     function createFlower() {
       const flower = document.createElement("div");
@@ -327,4 +336,3 @@
 
 </body>
 </html>
-
