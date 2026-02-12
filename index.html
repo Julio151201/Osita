@@ -7,16 +7,20 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
+    /* Fondo fijo para que no se mueva en celular */
     body {
-      height: 100vh;
+      height: 100svh;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #ff4b6e, #ff758c);
       overflow: hidden;
+      position: fixed;
+      inset: 0;
     }
 
-    /* Tarjeta */
+    /* Tarjeta fija al centro */
     .card {
       background: #fff;
       padding: 35px 25px;
@@ -25,7 +29,10 @@
       width: 92%;
       max-width: 420px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      position: relative;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       animation: fadeIn 1s ease;
       z-index: 2;
     }
@@ -320,3 +327,4 @@
 
 </body>
 </html>
+
