@@ -7,7 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
-    /* Fondo fijo para que no se mueva en celular */
+    /* Fondo rosa igual al de la pantalla final */
     body {
       height: 100svh;
       width: 100%;
@@ -20,7 +20,7 @@
       inset: 0;
     }
 
-    /* Tarjeta fija al centro con fondo rosa */
+    /* Tarjeta fija al centro con fondo rosa suave */
     .card {
       background: #ffe4ec;
       padding: 35px 25px;
@@ -143,6 +143,13 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.25);
     }
 
+    /* Texto final en blanco y cursiva */
+    .finalLove {
+      color: white;
+      font-style: italic;
+      margin-top: 10px;
+    }
+
     /* Lluvia de corazones final */
     .finalHeart {
       position: absolute;
@@ -217,9 +224,9 @@
       <div id="hearts"></div>
     </div>
 
-    <!-- Mensaje secreto -->
+    <!-- Mensaje secreto actualizado -->
     <div class="secret" id="secret">
-      Mi lugar favorito siempre será contigo ❤️
+      ❤️ Felicidades, te ganaste un beso 😘 ❤️
     </div>
   </div>
 
@@ -230,7 +237,7 @@
 
       <img src="OsitosComiendo.gif" alt="Ositos comiendo juntos" />
 
-      <p>Te quiero mucho, Osita ❤️</p>
+      <p class="finalLove">Te quiero mucho, Osita ❤️</p>
     </div>
   </div>
 
@@ -242,7 +249,6 @@
       document.getElementById("game").style.display = "block";
       burstFlowers();
 
-      /* Más tiempo antes de pantalla final */
       setTimeout(() => {
         const screen = document.getElementById("finalScreen");
         screen.classList.add("show");
@@ -261,7 +267,7 @@
     }
 
     noBtn.addEventListener("mouseover", moveNoButton);
-    noBtn.addEventListener("click", moveNoButton); // para celular
+    noBtn.addEventListener("click", moveNoButton);
 
     function createFlower() {
       const flower = document.createElement("div");
@@ -287,7 +293,6 @@
       }
     }
 
-    /* Juego mejorado: corazones que se mueven */
     let score = 0;
 
     function spawnHearts() {
@@ -318,7 +323,6 @@
       el.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*20-10}px)`;
     }
 
-    /* Lluvia de corazones final */
     function startHeartRain(){
       const screen = document.getElementById("finalScreen");
 
